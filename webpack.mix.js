@@ -1,5 +1,20 @@
 const mix = require('laravel-mix');
 
+mix.browserSync({
+    proxy: 'localhost:8000',
+    notify: false
+});
+
+
+mix.webpackConfig({
+    resolve: {
+        extensions: ['.js', '.vue'],
+        alias: {
+            '@': __dirname + '/resources'
+        }
+    }
+});
+
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
