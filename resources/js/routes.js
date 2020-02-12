@@ -1,10 +1,13 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
-import Website from '@/js/views/Website';
-import Dashboard from '@/js/views/Dashboard';
-import Home from '@/js/components/Home';
-import About from '@/js/components/About';
+import Website from '@/pages/Website';
+import WebsiteHome from '@/components/website/Home';
+import WebsiteAbout from '@/components/website/About';
+
+import Dashboard from '@/pages/Dashboard';
+import DashboardHome from '@/components/dashboard/Home';
+import DashboardAbout from '@/components/dashboard/About';
 
 Vue.use(VueRouter);
 
@@ -19,12 +22,12 @@ const router = new VueRouter({
                 {
                     path: '',
                     name: 'website.home',
-                    component: Home
+                    component: WebsiteHome
                 },
                 {
                     path: 'about',
                     name: 'website.about',
-                    component: About
+                    component: WebsiteAbout
                 }
             ]
         },
@@ -36,12 +39,12 @@ const router = new VueRouter({
                 {
                     path: '',
                     name: 'dashboard.home',
-                    component: Home
+                    component: DashboardHome
                 },
                 {
                     path: 'about',
                     name: 'dashboard.about',
-                    component: About
+                    component: DashboardAbout
                 }
             ]
         }

@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+const config = require('./webpack.config');
 
 mix.browserSync({
     proxy: 'localhost:8000',
@@ -6,14 +7,7 @@ mix.browserSync({
 });
 
 
-mix.webpackConfig({
-    resolve: {
-        extensions: ['.js', '.vue'],
-        alias: {
-            '@': __dirname + '/resources'
-        }
-    }
-});
+mix.webpackConfig(config);
 
 /*
  |--------------------------------------------------------------------------

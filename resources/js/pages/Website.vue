@@ -7,7 +7,7 @@
                 <v-list-item link
                              v-for="(link, id) in links"
                              :key="id"
-                             :to="{ name: link.to }"
+                             :to="link.to"
                              exact>
                     <v-list-item-action>
                         <v-icon>mdi-{{ link.icon }}</v-icon>
@@ -30,7 +30,7 @@
             </v-container>
         </v-content>
         <v-footer app>
-            <span>&copy; {{ new Date().getFullYear() }}</span>
+            <span>RiseLab &copy; {{ new Date().getFullYear() }}</span>
         </v-footer>
     </v-app>
 </template>
@@ -41,8 +41,8 @@
         data: () => ({
             drawer: null,
             links: [
-                { title: 'Home', icon: 'home-outline', to: 'website.home' },
-                { title: 'About', icon: 'information-outline', to: 'website.about' }
+                { title: 'Home', icon: 'home-outline', to: '/' },
+                { title: 'About', icon: 'information-outline', to: '/about' }
             ]
         })
     }

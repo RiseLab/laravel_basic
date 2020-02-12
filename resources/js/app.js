@@ -2,9 +2,9 @@ import './bootstrap';
 import Vue from 'vue';
 import Vuetify from 'vuetify';
 
-import Routes from '@/js/routes';
+import Routes from '@/routes';
 
-import App from '@/js/views/App';
+import App from '@/views/App';
 
 Vue.use(Vuetify);
 
