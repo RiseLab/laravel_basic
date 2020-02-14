@@ -1,5 +1,6 @@
 <template>
     <v-app>
+        <login v-if="!(user.authenticated && user.data)" />
         <v-navigation-drawer v-model="drawer"
                              app
                              clipped>
@@ -23,6 +24,12 @@
                    hide-on-scroll>
             <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
             <v-toolbar-title>Laravel Basic Dashboard</v-toolbar-title>
+            <v-spacer />
+            <v-btn color="primary"
+                   @click="logout"
+                   v-if="user.authenticated && user.data">
+                Logout
+            </v-btn>
         </v-app-bar>
         <v-content>
             <v-container fluid>
@@ -36,15 +43,50 @@
 </template>
 
 <script>
+    import Login from "@/components/dashboard/Login";
     export default {
         name: 'Dashboard',
+        components: {Login},
         data: () => ({
             drawer: null,
             links: [
                 { title: 'Home', icon: 'home-outline', to: '/dashboard' },
                 { title: 'About', icon: 'information-outline', to: '/dashboard/about' }
-            ]
-        })
+            ],
+            user: {
+                authenticated: auth.check(),
+                data: auth.user
+            }
+        }),
+        mounted() {
+            Event.$on('userLoggedIn', () => {
+                this.user = {
+                    authenticated: true,
+                    data: auth.user
+                }
+            });
+            Event.$on('userLoggedOut', () => {
+                this.user = {
+                    authenticated: false,
+                    data: auth.user
+                }
+            });
+        },
+        methods: {
+            logout () {
+                axios.post('/api/logout')
+                    .then(({data}) => {
+                        auth.logout();
+                        this.$router.push('/');
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+                    .finally(() => {
+
+                    });
+            }
+        }
     }
 </script>
 

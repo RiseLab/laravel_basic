@@ -16,7 +16,6 @@ const router = new VueRouter({
     routes: [
         {
             path: '/',
-            name: 'website',
             component: Website,
             children: [
                 {
@@ -33,7 +32,6 @@ const router = new VueRouter({
         },
         {
             path: '/dashboard',
-            name: 'dashboard',
             component: Dashboard,
             children: [
                 {
@@ -49,6 +47,18 @@ const router = new VueRouter({
             ]
         }
     ]
+});
+
+router.beforeEach((to, from, next) => {
+    if (to.name.indexOf('dashboard') === 0 && to.name !== 'dashboard.home' && !auth.check()) {
+        next({
+            path: '/dashboard'
+        });
+
+        return;
+    }
+
+    next();
 });
 
 export default router;
